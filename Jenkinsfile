@@ -13,3 +13,15 @@ node {
   }
  }
 }
+stage("Deploy"){
+ docker.image('alpine:latest').inside('-u root') {
+  sshagent (credentials: ['ssh-prod']) {
+   sh '''
+   apk add --no-cache openssh rsync
+   mkdir -p ~/.ssh
+   ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts
+   rsync -avz . ubuntu@$PROD_HOST:/home/ubuntu/app
+   '''
+  }
+ }
+}
