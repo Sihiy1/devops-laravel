@@ -14,10 +14,10 @@ node {
  }
 
  stage("Deploy Local"){
- sh '''
- mkdir -p /mnt/c/laravel-deploy
- cp -r * /mnt/c/laravel-deploy/
- echo "Deploy ke Windows berhasil"
- '''
-}
+  sh '''
+  mkdir -p laravel-deploy
+  cp -r * laravel-deploy/
+  echo "Deploy ke workspace berhasil"
+  '''
+ }
 }
