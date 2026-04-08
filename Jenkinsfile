@@ -13,18 +13,10 @@ node {
   }
  }
 }
-stage("Deploy"){
- docker.image('alpine:latest').inside('-u root') {
-  sh '''
-  apk add --no-cache openssh rsync
-  '''
-
-  sshagent (credentials: ['ssh-prod']) {
-   sh '''
-   mkdir -p ~/.ssh
-   ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts || true
-   echo "Deploy jalan (simulasi / skip kalau gagal koneksi)"
-   '''
-  }
- }
+stage("Deploy Local"){
+ sh '''
+ mkdir -p /tmp/laravel-deploy
+ cp -r * /tmp/laravel-deploy/
+ echo "Deploy local berhasil"
+ '''
 }
