@@ -1,0 +1,14 @@
+- name: Setup Hosts
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Create dev directory
+      file:
+        path: /home/ubuntu/dev.kelasdevops.xyz
+        state: directory
+
+    - name: Create prod directory
+      file:
+        path: /home/ubuntu/prod.kelasdevops.xyz
+        state: directory
+
