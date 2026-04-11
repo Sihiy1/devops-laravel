@@ -24,7 +24,7 @@ node {
                 sh 'ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts'
                 sh '''
                 rsync -rav --delete ./ \
-                bashal@$PROD_HOST:/home/bashal/prod.kelasdevops.xyz/ \
+                bintang@$PROD_HOST:/home/bashal/prod.kelasdevops.xyz/ \
                 --exclude=.env --exclude=storage --exclude=.git
                 '''
             }
