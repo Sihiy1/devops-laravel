@@ -1,20 +1,13 @@
 node {
-    checkout scm
+ checkout scm
 
-    // Build stage
-    stage("Build") {
-        docker.image('composer:2').inside('-u root') {
-            sh 'rm composer.lock'
-            sh 'composer install'
-        }
-    }
+ stage("Build"){
+  sh 'composer install'
+ }
 
-    // Testing stage
-    stage("Testing") {
-        docker.image('ubuntu').inside('-u root') {
-            sh 'echo "Ini adalah test"'
-        }
-    }
+ stage("Test"){
+  sh 'echo "Ini adalah test"'
+ }
 
     // Deploy stage
     stage("Deploy") {
