@@ -9,18 +9,15 @@ node {
   sh 'echo "Ini adalah test"'
  }
 
-    // Deploy stage
-    stage("Deploy") {
-        docker.image('agung3wi/alpine-rsync:1.1').inside('-u root') {
-            sshagent(['dymas']) {
-                sh 'mkdir -p ~/.ssh'
-                sh 'ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts'
-                sh '''
-                rsync -rav --delete ./ \
-                dymas@$PROD_HOST:/home/dymas/prod.kelasdevops.xyz/ \
-                --exclude=.env --exclude=storage --exclude=.git
-                '''
-            }
-        }
+ stage("Deploy") {
+    sshagent(['dymas']) {
+        sh 'mkdir -p ~/.ssh'
+        sh 'ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts'
+        sh '''
+        rsync -rav --delete ./ \
+        dymas@$PROD_HOST:/home/dymas/prod.kelasdevops.xyz/ \
+        --exclude=.env --exclude=storage --exclude=.git
+        '''
     }
+ }
 }
